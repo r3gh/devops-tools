@@ -66,7 +66,7 @@ if not cloud.get_server(instance_name):
                         image=image_name,
                         flavor=flavor_name,
                         wait=True,
-                        auto_ip=True,
+                        ips=[ip_address],
                         key_name=keypair_name,
                         security_groups=[sec_group_name],
                         network=network_name,
