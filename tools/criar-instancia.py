@@ -52,7 +52,7 @@ if not cloud.list_router_interfaces(router_dict):
     cloud.add_router_interface(router_dict, subnet_id=subnet_id)
 print("Interface criada para o roteador '{}'!".format(router_name))
 
-print("\nLevantando uma instância...")
+print("\nLevantando instância...")
 image_name = 'Ubuntu 16.04 LTS Xenial'
 flavor_name = 'm1.large'
 instance_name = 'hackathonRioHeatMap'
@@ -60,16 +60,16 @@ image = cloud.get_image(image_name)
 flavor = cloud.get_flavor(flavor_name)
 network = cloud.get_network(network_name)
 ex_userdata = open('./scripts/run.sh', 'r').read()
-
-cloud.create_server(instance_name,
-                    image=image_name,
-                    flavor=flavor_name,
-                    wait=True,
-                    auto_ip=True,
-                    key_name=keypair_name,
-                    security_groups=[sec_group_name],
-                    network=network_name,
-                    userdata=ex_userdata)
+if not cloud.get_server(instance_name):
+    cloud.create_server(instance_name,
+                        image=image_name,
+                        flavor=flavor_name,
+                        wait=True,
+                        auto_ip=True,
+                        key_name=keypair_name,
+                        security_groups=[sec_group_name],
+                        network=network_name,
+                        userdata=ex_userdata)
 print("Imagem '{}' de '{}' com {} vcpus e {} MB de RAM na rede '{}'!".format(instance_name,
                                                                              image.name,
                                                                              flavor.vcpus,
