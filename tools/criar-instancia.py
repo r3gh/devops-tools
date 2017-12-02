@@ -52,7 +52,7 @@ if not cloud.list_router_interfaces(router_dict):
     cloud.add_router_interface(router_dict, subnet_id=subnet_id)
 print("Interface criada para o roteador '{}'!".format(router_name))
 
-print("Levantando uma instância...")
+print("\nLevantando uma instância...")
 image_name = 'Ubuntu 16.04 LTS Xenial'
 flavor_name = 'm1.large'
 instance_name = 'hackathonRioHeatMap'
