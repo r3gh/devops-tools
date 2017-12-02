@@ -19,7 +19,7 @@ if not cloud.search_security_groups(sec_group_name):
 print("As portas [{}] foram abertas no grupo \'{}\'!".format(', '.join(str(p) for p in ports),
                                                              sec_group_name))
 
-print("\Levantando uma instância...")
+print("Levantando uma instância...")
 image_name = 'Ubuntu 16.04 LTS Xenial'
 flavor_name = 'm1.large'
 network_name = "public_network"
