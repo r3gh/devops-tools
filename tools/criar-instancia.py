@@ -59,6 +59,7 @@ instance_name = 'hackathonRioHeatMap'
 image = cloud.get_image(image_name)
 flavor = cloud.get_flavor(flavor_name)
 network = cloud.get_network(network_name)
+ip_address = dict(cloud.list_floating_ips()[0])['floating_ip_address']
 ex_userdata = open('./scripts/run.sh', 'r').read()
 if not cloud.get_server(instance_name):
     cloud.create_server(instance_name,
@@ -70,8 +71,9 @@ if not cloud.get_server(instance_name):
                         security_groups=[sec_group_name],
                         network=network_name,
                         userdata=ex_userdata)
-print("Imagem '{}' de '{}' com {} vcpus e {} MB de RAM na rede '{}'!".format(instance_name,
-                                                                             image.name,
-                                                                             flavor.vcpus,
-                                                                             flavor.ram,
-                                                                             network.name))
+print("Imagem '{}' de '{}' com {} vcpus e {} MB de RAM na rede '{} / {}'!".format(instance_name,
+                                                                                  image.name,
+                                                                                  flavor.vcpus,
+                                                                                  flavor.ram,
+                                                                                  network.name,
+                                                                                  ip_address))
