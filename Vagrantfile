@@ -20,8 +20,12 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", inline: <<-SHELL
 
     # Setting up bash environment
-    echo "cd ~/devops-tools"                >> /etc/profile
-    echo "source ~/devops-tools/openrc.sh"  >> /etc/profile
+    echo "cd ~/devopss-tools"                                                        >> /etc/profile
+    echo "source ~/devops-tools/openrc.sh"                                           >> /etc/profile
+    alias get-ip="python3 -c \"import shade; cloud = shade.openstack_cloud(cloud='envvars'); \
+                               print(dict(cloud.list_floating_ips()[0])['floating_ip_address'])\""
+                                                                                     >> /etc/profile
+    alias sshcloud="ssh -i .ssh/id_rsa -l ubuntu \$(get-ip)"                         >> /etc/profile
 
     # Install simulator dependencies
     echo "Installing dependencies..."
