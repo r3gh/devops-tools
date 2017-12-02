@@ -18,3 +18,15 @@ if not cloud.search_security_groups(sec_group_name):
         cloud.create_security_group_rule(sec_group_name, port, port, 'TCP')
 print("As portas [{}] foram abertas no grupo \'{}\'!".format(', '.join(str(p) for p in ports),
                                                              sec_group_name))
+
+print("\nPegando imagem, sabor e rede...")
+image_name = 'Ubuntu 16.04 LTS Xenial'
+flavor_name = 'm1.large'
+network_name = "public_network"
+image = cloud.get_image(image_name)
+flavor = cloud.get_flavor(flavor_name)
+network = cloud.get_network(network_name)
+print("Imagem de '{}' com {} vcpus e {} MB de RAM na rede '{}'!".format(image.name,
+                                                                        flavor.vcpus,
+                                                                        flavor.ram,
+                                                                        network.name))
