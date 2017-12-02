@@ -1,7 +1,6 @@
 # Project files
 .vagrant
 .vscode
-openrc.sh
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
