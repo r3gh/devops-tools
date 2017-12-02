@@ -32,7 +32,7 @@ print("Imagem de '{}' com {} vcpus e {} MB de RAM na rede '{}'!".format(image.na
                                                                         network.name))
 
 instance_name = 'hackathonRioHeatMap'
-ex_userdata = open("./run.sh", 'r').read()
+ex_userdata = open("./scripts/run.sh", 'r').read()
 cloud.create_server(instance_name,
                     image=image_name,
                     flavor=flavor_name,
