@@ -20,7 +20,8 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", inline: <<-SHELL
 
     # Setting up bash environment
-    echo "cd ~/devops-tools" >> /etc/profile
+    echo "cd ~/devops-tools"                >> /etc/profile
+    echo "source ~/devops-tools/openrc.sh"  >> /etc/profile
 
     # Install simulator dependencies
     echo "Installing dependencies..."
