@@ -23,16 +23,12 @@ print("\nPegando imagem, sabor e rede...")
 image_name = 'Ubuntu 16.04 LTS Xenial'
 flavor_name = 'm1.large'
 network_name = "public_network"
+instance_name = 'hackathonRioHeatMap'
 image = cloud.get_image(image_name)
 flavor = cloud.get_flavor(flavor_name)
 network = cloud.get_network(network_name)
-print("Imagem de '{}' com {} vcpus e {} MB de RAM na rede '{}'!".format(image.name,
-                                                                        flavor.vcpus,
-                                                                        flavor.ram,
-                                                                        network.name))
-
-instance_name = 'hackathonRioHeatMap'
 ex_userdata = open("./scripts/run.sh", 'r').read()
+
 cloud.create_server(instance_name,
                     image=image_name,
                     flavor=flavor_name,
@@ -42,3 +38,7 @@ cloud.create_server(instance_name,
                     security_groups=[sec_group_name],
                     network=network_name,
                     userdata=ex_userdata)
+print("Imagem de '{}' com {} vcpus e {} MB de RAM na rede '{}'!".format(image.name,
+                                                                        flavor.vcpus,
+                                                                        flavor.ram,
+                                                                        network.name))
