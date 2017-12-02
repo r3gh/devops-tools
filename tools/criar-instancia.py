@@ -4,7 +4,7 @@ cloud = shade.openstack_cloud(cloud='envvars')
 
 print("\nAdicionando chave SSH...")
 keypair_name = 'r3gh-sshkey'
-pub_key = open(".ssh/id_rsa.pub", 'r').read().strip()
+pub_key = open('.ssh/id_rsa.pub', 'r').read().strip()
 if not cloud.search_keypairs(keypair_name):
     cloud.create_keypair(keypair_name, pub_key)
 print("A chave \'{}\' foi adicionada!".format(keypair_name))
@@ -55,12 +55,11 @@ print("Interface criada para o roteador '{}'!".format(router_name))
 print("Levantando uma instância...")
 image_name = 'Ubuntu 16.04 LTS Xenial'
 flavor_name = 'm1.large'
-network_name = "public_network"
 instance_name = 'hackathonRioHeatMap'
 image = cloud.get_image(image_name)
 flavor = cloud.get_flavor(flavor_name)
 network = cloud.get_network(network_name)
-ex_userdata = open("./scripts/run.sh", 'r').read()
+ex_userdata = open('./scripts/run.sh', 'r').read()
 
 cloud.create_server(instance_name,
                     image=image_name,
