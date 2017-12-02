@@ -23,11 +23,10 @@ Vagrant.configure("2") do |config|
     echo "cd ~/devops-tools" >> /etc/profile
 
     # Install simulator dependencies
-    # echo "Installing dependencies..."
+    echo "Installing dependencies..."
     apt-get update
     apt-get install -y python3 python3-pip python3-dev build-essential
     pip3 install --upgrade pip setuptools
     pip3 install --upgrade -r /home/ubuntu/devops-tools/requirements.txt
-    source openrc.sh
   SHELL
 end
