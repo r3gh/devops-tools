@@ -19,6 +19,39 @@ if not cloud.search_security_groups(sec_group_name):
 print("As portas [{}] foram abertas no grupo \'{}\'!".format(', '.join(str(p) for p in ports),
                                                              sec_group_name))
 
+print("\nCriando rede privada...")
+network_name = 'r3gh-network'
+if not cloud.search_networks(network_name):
+    cloud.create_network(network_name)
+print("Rede privada '{}' criada!".format(network_name))
+
+print("\nCriando sub-rede...")
+subnet_name = 'r3gh-subnet'
+if not cloud.search_subnets(subnet_name):
+    cloud.create_subnet(network_name,
+                        subnet_name=subnet_name,
+                        enable_dhcp=True,
+                        cidr='192.168.0.0/24',
+                        gateway_ip='192.168.0.1',
+                        dns_nameservers=['9.9.9.9'])
+print("Sub-rede '{}' criada!".format(subnet_name))
+
+print("\nCriando roteador...")
+router_name = 'r3gh-router'
+public_network_id = cloud.get_network('public_network').id
+if not cloud.search_routers(router_name):
+    cloud.create_router(name=router_name,
+                        enable_snat=True,
+                        ext_gateway_net_id=public_network_id)
+print("Roteador '{}' criado!".format(router_name))
+
+print("\nCriando interface do roteador...")
+router_dict = cloud.get_router(router_name)
+subnet_id = cloud.get_subnet(subnet_name).id
+if not cloud.list_router_interfaces(router_dict):
+    cloud.add_router_interface(router_dict, subnet_id=subnet_id)
+print("Interface criada para o roteador '{}'!".format(router_name))
+
 print("Levantando uma instância...")
 image_name = 'Ubuntu 16.04 LTS Xenial'
 flavor_name = 'm1.large'
