@@ -8,7 +8,7 @@ Vagrant.configure("2") do |config|
   config.ssh.forward_x11 = true
 
   config.vm.synced_folder ".", "/vagrant", disabled: true
-  config.vm.synced_folder ".", "/home/vagrant/devops-tools"
+  config.vm.synced_folder ".", "/home/ubuntu/devops-tools"
 
   config.vm.provider "virtualbox" do |vb|
     vb.name = "devops-tools"
@@ -27,6 +27,6 @@ Vagrant.configure("2") do |config|
     apt-get update
     apt-get install -y python3 python3-pip python3-dev build-essentials
     pip3 install --upgrade pip setuptools
-    pip3 install --upgrade -r /home/vagrant/devops-tools/requirements.txt
+    pip3 install --upgrade -r /home/ubuntu/devops-tools/requirements.txt
   SHELL
 end
