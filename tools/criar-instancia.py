@@ -19,7 +19,7 @@ if not cloud.search_security_groups(sec_group_name):
 print("As portas [{}] foram abertas no grupo \'{}\'!".format(', '.join(str(p) for p in ports),
                                                              sec_group_name))
 
-print("\nPegando imagem, sabor e rede...")
+print("\Levantando uma instância...")
 image_name = 'Ubuntu 16.04 LTS Xenial'
 flavor_name = 'm1.large'
 network_name = "public_network"
@@ -38,7 +38,8 @@ cloud.create_server(instance_name,
                     security_groups=[sec_group_name],
                     network=network_name,
                     userdata=ex_userdata)
-print("Imagem de '{}' com {} vcpus e {} MB de RAM na rede '{}'!".format(image.name,
-                                                                        flavor.vcpus,
-                                                                        flavor.ram,
-                                                                        network.name))
+print("Imagem '{}' de '{}' com {} vcpus e {} MB de RAM na rede '{}'!".format(instance_name,
+                                                                             image.name,
+                                                                             flavor.vcpus,
+                                                                             flavor.ram,
+                                                                             network.name))
