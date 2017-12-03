@@ -5,7 +5,7 @@ Coleção de ferramentas de DevOps
 Para facilitar a definição das credenciais de acesso a nuvem criamos uma máquina virtual local para
 uso de todos os desenvolvedores.
 
-Usamos **Vagrant** e **VritualBox** como provisionadores desta VM local, conforme especificado no `Vagrantfile`.
+Usamos **Vagrant** e **VirtualBox** como provisionadores desta VM local, conforme especificado no `Vagrantfile`.
 
 Em `.ssh/` se encontram as chaves de acesso SSH a nuvem.
 Esta chave foi criada **dentro** da máquina de DevOps para não comprometer as chaves SSH dos desenvolvedores.
